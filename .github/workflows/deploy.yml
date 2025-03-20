@@ -39,25 +39,25 @@ jobs:
 
       - name: Install dependencies
         run: npm install --force
-        working-directory: ./angular-nest/front-end
-   #Angular uses client-side routing. GitHub Pages, by default, doesn't understand Angular's routing structure and tries to fetch files directly from the angular19-app/ directory, which doesn't exist as a physical path.
+        working-directory: ./front-end
+   #Angular uses client-side routing. GitHub Pages, by default, doesn't understand Angular's routing structure.
    #GitHub Pages doesn't support fallback routing for Single Page Applications (SPA).
       - name: Build Angular app
         run: npm run build -- --base-href=/angular-nest/
-        working-directory: ./angular-nest/front-end
+        working-directory: ./front-end
 
       - name: List contents of dist folder
-        run: ls -R ./angular-nest/front-end/dist
+        run: ls -R ./front-end/dist
 
       #as "outputPath": "dist/client" in angular.json  
       - name: Upload build artifacts
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
-          path: ./angular-nest/front-end/dist/front-end
+          path: ./front-end/dist/front-end
     
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./angular-nest/front-end/dist/front-end
+          publish_dir: ./front-end/dist/front-end
