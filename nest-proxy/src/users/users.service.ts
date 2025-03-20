@@ -9,10 +9,10 @@ export class UsersService {
 
   async create(userDto: { name: string; email: string; password: string }) {
     const newUser = new this.userModel(userDto);
-    return newUser.save();
+    return await newUser.save();
   }
 
   async findAll() {
-    return this.userModel.find().exec();
+    return await this.userModel.find().exec();
   }
 }

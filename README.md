@@ -4,6 +4,12 @@ npx @angular/cli@17 new front-end --no-standalone
 
 cd front-end
 
+ng serve --open --configuration development
+
+old commands:
+
+ng serve --proxy-config proxy.conf.json
+
 npm start
 
 http://localhost:4200/

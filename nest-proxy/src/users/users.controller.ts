@@ -10,10 +10,16 @@ export class UsersController {
     //     return [{ id: 1, name: 'John Doe' }];
     //   } 
 
-      @Post()
-      async createUser(@Body() userData: { name: string; email: string; password: string }) {
-        return this.usersService.create(userData);
-      }
+    @Post()
+    async createUser(@Body() userData: { name: string; email: string; password: string }) {
+      console.log('Received user data:', userData); // Debugging
+      const user = await this.usersService.create(userData);
+      return {
+        message: 'User registered successfully!',
+        user,
+      };
+    }
+    
     
       @Get()
       async getUsers() {
