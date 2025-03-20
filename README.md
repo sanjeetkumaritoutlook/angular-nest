@@ -48,3 +48,21 @@ MongoDB stores the user in a users collection.
 NestJS returns a response to Angular, confirming the user was created.
 
 CORS is enabled (app.enableCors()) in nestjs main.ts as 4200 port is calling 3000 port to connect to mongodb
+
+## fully switch to Jest for unit testing
+
+uninstall jasmine-karma
+
+npm uninstall karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter
+
+then install Jest
+
+npm install --save-dev jest jest-preset-angular @testing-library/angular @types/jest
+
+npm install --save-dev @types/jest
+
+npm install --save-dev @testing-library/jest-dom
+
+run:
+
+npm test

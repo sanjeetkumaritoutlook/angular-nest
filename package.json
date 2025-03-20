@@ -23,11 +23,7 @@
   "keywords": [
     "Angular",
     "NestJS",
-    "Serverless",
     "UI",
-    "S3",
-    "Lambda",
-    "AWS",
-    "CDK"
+    "MongoDB"
   ]
 }
