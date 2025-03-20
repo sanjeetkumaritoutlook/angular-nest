@@ -25,3 +25,7 @@ npm run start:dev
 Test the API
 
 Test in ThunderClient or POSTMAN
+
+## Connect to MongoDB ,install Mongoose:
+
+npm install @nestjs/mongoose mongoose
