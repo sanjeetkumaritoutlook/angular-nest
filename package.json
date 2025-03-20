@@ -1,0 +1,33 @@
+
+{
+  "name": "angular-nest",
+  "version": "1.0.0",
+  "description": "Angular/NestJS UI",
+  "author": "sanjeetkumarit@outlook.com",
+  "license": "MIT",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "install:all": "npm i && cd nest-proxy && npm i && cd ../front-end && npm i && cd ../cdk && npm i",
+    "build:nest": "cd nest-proxy && npm run-script build-and-bundle",
+    "start:nest": "cd nest-proxy && npm run-script start:dev",
+    "debug:nest": "cd nest-proxy && npm run-script start:debug",
+    "test:nest": "cd nest-proxy && npm run-script test-plus-reports",
+    "build:angular": "cd front-end && npm run-script build",
+    "start:angular": "cd front-end && npm run-script start",
+    "test:angular": "cd front-end && npm run-script jest-test-plus-reports"
+  },
+  "devDependencies": {},
+ 
+  "keywords": [
+    "Angular",
+    "NestJS",
+    "Serverless",
+    "UI",
+    "S3",
+    "Lambda",
+    "AWS",
+    "CDK"
+  ]
+}
