@@ -54,10 +54,10 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
-          path: ./front-end/dist/front-end
+          path: ./front-end/dist/front-end/browser
     
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./front-end/dist/front-end
+          publish_dir: ./front-end/dist/front-end/browser
