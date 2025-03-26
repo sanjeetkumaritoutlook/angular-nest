@@ -66,3 +66,5 @@ npm install --save-dev @testing-library/jest-dom
 run:
 
 npm test
+
+snapshot testing in jest (__snapshots__)
