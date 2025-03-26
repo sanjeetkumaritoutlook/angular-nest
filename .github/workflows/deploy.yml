@@ -29,6 +29,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Run Codacy analysis
+        env:
+          CODACY_API_TOKEN: ${{ secrets.CODACY_API_TOKEN }}
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        run: |
+          curl -X POST "https://api.codacy.com/2.0/analysis" \
+          -H "Authorization: Bearer $CODACY_API_TOKEN" \
+          -d '{ "branch": "main" }'
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -40,6 +50,15 @@ jobs:
       - name: Install dependencies
         run: npm install --force
         working-directory: ./front-end
+
+      - name: Run Jest Tests and Upload Coverage
+        env:
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}  # Ensure it's added in GitHub Secrets
+        run: |
+          npm run test -- --coverage
+          bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage/lcov.info
+        working-directory: ./front-end  
+
    #Angular uses client-side routing. GitHub Pages, by default, doesn't understand Angular's routing structure.
    #GitHub Pages doesn't support fallback routing for Single Page Applications (SPA).
       - name: Build Angular app
