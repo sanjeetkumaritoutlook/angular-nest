@@ -67,4 +67,18 @@ run:
 
 npm test
 
-snapshot testing in jest (__snapshots__)
+snapshot testing in jest (__snapshots__)  within the component folder itself
+
+Remove all packages of jasmine karma before executing jest: npx jest
+
+"@types/jasmine": "~5.1.0",
+
+"jasmine-core": "~5.1.0",
+
+## Jest snapshot testing
+
+✅ Avoids conflicts – No mixing of render and TestBed.
+
+✅ Uses TestBed for all tests – Consistent setup for regular and snapshot tests.
+
+✅ Manually extracts HTML – Ensures snapshot testing without unnecessary test environments.
