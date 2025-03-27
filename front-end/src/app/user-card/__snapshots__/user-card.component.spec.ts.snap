@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserCardComponent should match snapshot with another user 1`] = `"<div class="card"><h2>Jane Smith</h2><p>Email: jane@example.com</p><p>Role: User</p><button>Select</button></div>"`;
+
+exports[`UserCardComponent should match snapshot with default user 1`] = `"<div class="card"><h2>John Doe</h2><p>Email: john@example.com</p><p>Role: Admin</p><button>Select</button></div>"`;
