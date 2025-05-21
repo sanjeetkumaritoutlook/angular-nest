@@ -82,3 +82,8 @@ Remove all packages of jasmine karma before executing jest: npx jest
 ✅ Uses TestBed for all tests – Consistent setup for regular and snapshot tests.
 
 ✅ Manually extracts HTML – Ensures snapshot testing without unnecessary test environments.
+
+## VSCode marketplace
+https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner
+
+https://github.com/firsttris/vscode-jest-runner/tree/master
