@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
+import { getApiUrl } from './helper';
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
@@ -28,7 +29,7 @@ export class FileUploadComponent {
     const formData = new FormData();
     formData.append('file', this.selectedFile);
     // ✅ dynamically picks the correct backend URL
-    this.http.post(`${environment.apiUrl}/upload`, formData)
+    this.http.post(`${getApiUrl()}/upload`, formData)
       .subscribe({
         next: (res: any) => {
           this.uploadResponse = `✅ Uploaded: ${res.filename}`;
