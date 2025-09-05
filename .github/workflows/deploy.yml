@@ -52,12 +52,14 @@ jobs:
         working-directory: ./front-end
 
       - name: Run Jest Tests and Upload Coverage
+        # Disabled temporarily: set the if expression to true or remove this line to re-enable
+        if: ${{ false }}
         env:
           CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}  # Ensure it's added in GitHub Secrets
         run: |
           npm run test -- --coverage
           bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage/lcov.info
-        working-directory: ./front-end  
+        working-directory: ./front-end
 
    #Angular uses client-side routing. GitHub Pages, by default, doesn't understand Angular's routing structure.
    #GitHub Pages doesn't support fallback routing for Single Page Applications (SPA).

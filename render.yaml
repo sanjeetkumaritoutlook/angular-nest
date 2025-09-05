@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: file-upload-backend
+    env: node
+    rootDir: nest-proxy
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+
+  - type: static
+    name: file-upload-frontend
+    rootDir: front-end
+    buildCommand: npm install && npm run build --prod
+    publishDir: dist/front-end/browser

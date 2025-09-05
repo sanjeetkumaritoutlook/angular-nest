@@ -115,3 +115,12 @@ Module = Groups controller + service
 
 ## generate angular environments
 ng generate environments
+
+## env file generate
+
+npm install dotenv
+
+## DB tools
+Studio 3T → MongoDB-focused, with deep document editing features.
+
+DbVisualizer → Multi-database, SQL-first, great if you deal with PostgreSQL, MySQL, Oracle, etc., in one tool.
