@@ -9,6 +9,8 @@ import { UsersComponent } from './users/users.component';
 import { SimpleComponent } from './simple/simple.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,13 +18,15 @@ import { UserListComponent } from './user-list/user-list.component';
     UsersComponent,
     SimpleComponent,
     UserCardComponent,
-    UserListComponent
+    UserListComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

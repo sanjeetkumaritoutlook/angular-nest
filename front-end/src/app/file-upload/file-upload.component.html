@@ -1,0 +1,9 @@
+<div style="margin: 2rem">
+  <h2>Upload a PDF File</h2>
+  <form (ngSubmit)="onSubmit()">
+    <input type="file" (change)="onFileSelected($event)" accept="application/pdf" />
+    <button type="submit">Upload</button>
+  </form>
+
+  <p *ngIf="uploadResponse">{{ uploadResponse }}</p>
+</div>

@@ -87,3 +87,31 @@ Remove all packages of jasmine karma before executing jest: npx jest
 https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner
 
 https://github.com/firsttris/vscode-jest-runner/tree/master
+
+## Multer
+
+Multer is a Node.js middleware for handling multipart/form-data, the enctype used for submitting forms with file uploads. It simplifies the process of receiving and processing file uploads in a web application by parsing the incoming data and allowing you to store files on the server's disk or in memory. Multer works with frameworks like Express.js and offers options for customizing storage, filtering file types, setting size limits, and handling errors.
+
+npm install @nestjs/platform-express multer
+
+npm install --save-dev @types/multer
+
+# Generate a module named upload
+nest g module upload
+
+# Generate a controller inside upload folder
+nest g controller upload
+
+# Generate service
+nest g service upload
+
+👉 Typically:
+
+Controller = Handles incoming HTTP requests (/upload)
+
+Service = Business logic (e.g., saving file metadata, uploading to S3, DB operations)
+
+Module = Groups controller + service
+
+## generate angular environments
+ng generate environments
