@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment.development';
 import { getApiUrl } from './helper';
+
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrl: './file-upload.component.scss'
 })
 export class FileUploadComponent {
- selectedFile: File | null = null;
+  selectedFile: File | null = null;
   uploadResponse: string | null = null;
+  isLoading = false; // 👈 spinner state
 
   constructor(private http: HttpClient) {}
 
@@ -17,7 +18,13 @@ export class FileUploadComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
+      this.uploadResponse = null; // reset old response
     }
+  }
+
+  onClear() {
+    this.selectedFile = null;
+    this.uploadResponse = null;
   }
 
   onSubmit() {
@@ -26,17 +33,19 @@ export class FileUploadComponent {
       return;
     }
 
+    this.isLoading = true; // 👈 show spinner
     const formData = new FormData();
     formData.append('file', this.selectedFile);
-    // ✅ dynamically picks the correct backend URL
-    this.http.post(`${getApiUrl()}/upload`, formData)
-      .subscribe({
-        next: (res: any) => {
-          this.uploadResponse = `✅ Uploaded: ${res.filename}`;
-        },
-        error: (err) => {
-          this.uploadResponse = `❌ Error: ${err.message}`;
-        },
-      });
+
+    this.http.post(`${getApiUrl()}/upload`, formData).subscribe({
+      next: (res: any) => {
+        this.uploadResponse = `✅ Uploaded: ${res.filename}`;
+        this.isLoading = false; // hide spinner
+      },
+      error: (err) => {
+        this.uploadResponse = `❌ Error: ${err.message}`;
+        this.isLoading = false; // hide spinner
+      },
+    });
   }
 }

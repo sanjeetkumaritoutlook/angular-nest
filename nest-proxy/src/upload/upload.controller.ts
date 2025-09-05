@@ -10,7 +10,7 @@ export class UploadController {
      @Post()
   @UseInterceptors(
     FileInterceptor('file', {
-      storage: diskStorage({
+      storage: diskStorage({   //disk storage means file system
         destination: './uploads', // folder to store files
         filename: (req, file, cb) => {
           const uniqueSuffix =

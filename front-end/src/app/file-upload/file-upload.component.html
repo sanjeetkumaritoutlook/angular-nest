@@ -1,9 +1,31 @@
 <div style="margin: 2rem">
   <h2>Upload a PDF File</h2>
+
   <form (ngSubmit)="onSubmit()">
-    <input type="file" (change)="onFileSelected($event)" accept="application/pdf" />
-    <button type="submit">Upload</button>
+    <input 
+      type="file" 
+      (change)="onFileSelected($event)" 
+      accept="application/pdf" 
+      [disabled]="isLoading"
+    />
+
+    <button type="submit" [disabled]="!selectedFile || isLoading">
+      Upload
+    </button>
+
+    <button 
+      type="button" 
+      (click)="onClear()" 
+      [disabled]="!selectedFile || isLoading">
+      Clear
+    </button>
   </form>
+
+  <!-- Spinner while uploading -->
+  <div *ngIf="isLoading" style="margin-top: 1rem">
+    <div class="spinner"></div>
+    <p>Uploading, please wait...</p>
+  </div>
 
   <p *ngIf="uploadResponse">{{ uploadResponse }}</p>
 </div>
