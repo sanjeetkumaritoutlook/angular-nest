@@ -24,13 +24,15 @@ export class FileUploadComponent {
     }
   }
 
-  onClear() {
-    this.selectedFile = null;
+  onClear(keepMessage: boolean = false) {
+  this.selectedFile = null;
+  if (!keepMessage) {
     this.uploadResponse = null;
-    if (this.fileInput) {
-      this.fileInput.nativeElement.value = ''; // reset file input
-    }
   }
+  if (this.fileInput) {
+    this.fileInput.nativeElement.value = ''; // reset file input
+  }
+}
 
   onSubmit() {
     if (!this.selectedFile) {
@@ -44,9 +46,11 @@ export class FileUploadComponent {
 
     this.http.post(`${getApiUrl()}/upload`, formData).subscribe({
       next: (res: any) => {
-        this.uploadResponse = `${res.message} → ${res.filename}` ||`✅ Uploaded: ${res.filename}`;
+        this.uploadResponse = res.message 
+        ? `${res.message} → ${res.filename}` 
+        : `✅ Uploaded: ${res.filename}`;
         this.isLoading = false;
-        this.onClear(); // auto-clear input after success
+        this.onClear(true); // 👈 clears file input but keeps success message
       },
       error: (err) => {
         this.uploadResponse = `❌ Error: ${err.error?.message || err.message}`;
