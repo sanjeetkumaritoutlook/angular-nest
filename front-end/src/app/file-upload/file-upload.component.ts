@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { getApiUrl } from './helper';
 
@@ -8,9 +8,11 @@ import { getApiUrl } from './helper';
   styleUrl: './file-upload.component.scss'
 })
 export class FileUploadComponent {
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+
   selectedFile: File | null = null;
   uploadResponse: string | null = null;
-  isLoading = false; // 👈 spinner state
+  isLoading = false;
 
   constructor(private http: HttpClient) {}
 
@@ -18,13 +20,16 @@ export class FileUploadComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
-      this.uploadResponse = null; // reset old response
+      this.uploadResponse = null;
     }
   }
 
   onClear() {
     this.selectedFile = null;
     this.uploadResponse = null;
+    if (this.fileInput) {
+      this.fileInput.nativeElement.value = ''; // reset file input
+    }
   }
 
   onSubmit() {
@@ -33,18 +38,19 @@ export class FileUploadComponent {
       return;
     }
 
-    this.isLoading = true; // 👈 show spinner
+    this.isLoading = true;
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
     this.http.post(`${getApiUrl()}/upload`, formData).subscribe({
       next: (res: any) => {
-        this.uploadResponse = `✅ Uploaded: ${res.filename}`;
-        this.isLoading = false; // hide spinner
+        this.uploadResponse = `${res.message} → ${res.filename}` ||`✅ Uploaded: ${res.filename}`;
+        this.isLoading = false;
+        this.onClear(); // auto-clear input after success
       },
       error: (err) => {
-        this.uploadResponse = `❌ Error: ${err.message}`;
-        this.isLoading = false; // hide spinner
+        this.uploadResponse = `❌ Error: ${err.error?.message || err.message}`;
+        this.isLoading = false;
       },
     });
   }

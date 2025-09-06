@@ -4,6 +4,7 @@
   <form (ngSubmit)="onSubmit()">
     <input 
       type="file" 
+      #fileInput
       (change)="onFileSelected($event)" 
       accept="application/pdf" 
       [disabled]="isLoading"
