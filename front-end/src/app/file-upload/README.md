@@ -71,3 +71,62 @@ Small files → Multer (/upload)
 Large streaming uploads → Busboy (/stream-upload)
 
 But don’t combine them on the same route (Multer already uses Busboy internally; you’d be duplicating work).
+
+## enctype
+
+When you make a POST request, you have to encode the data that forms the body of the request in some way.
+
+HTML forms provide three methods of encoding.
+
+application/x-www-form-urlencoded (the default)
+multipart/form-data
+text/plain
+Work was being done on adding application/json, but that has been abandoned.
+
+When you are writing client-side code:
+
+use multipart/form-data when your form includes any <input type="file"> elements
+otherwise you can use multipart/form-data or application/x-www-form-urlencoded but application/x-www-form-urlencoded will be more efficient
+When you are writing server-side code:
+
+Use a prewritten form handling library
+
+multipart/form-data is significantly more complicated but it allows entire files to be included in the data. An example of the result can be found in the HTML 4 specification.
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>upload</title>
+</head>
+<body>
+<form action="http://localhost:8000" method="post" enctype="multipart/form-data">
+  <p><input type="text" name="text1" value="text default">
+  <p><input type="text" name="text2" value="a&#x03C9;b">
+  <p><input type="file" name="file1">
+  <p><input type="file" name="file2">
+  <p><input type="file" name="file3">
+  <p><button type="submit">Submit</button>
+</form>
+</body>
+</html>
+```
+
+## 6. Handling multipart/form-data on the Server Side
+Handling multipart/form-data varies depending on the server framework you're using. Here’s a quick overview of how to handle it with some popular frameworks:
+
+Node.JS (using Express and multer):
+
+```
+const express = require('express');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+
+const app = express();
+
+app.post('/upload', upload.single('profile_picture'), (req, res) => {
+  console.log(req.body.username); // Access text fields
+  console.log(req.file);          // Access the uploaded file
+  res.send('File uploaded successfully');
+```
