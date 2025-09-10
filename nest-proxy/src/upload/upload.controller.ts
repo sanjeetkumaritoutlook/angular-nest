@@ -1,4 +1,5 @@
 import { Controller, Post,
+  Req,
   UploadedFile,
   UseInterceptors, } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -36,14 +37,16 @@ export class UploadController {
         },
     }),
   )
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
+  uploadFile(@UploadedFile() file: Express.Multer.File,  @Req() req) {
    if (!file) {
       return { message: '❌ No file uploaded', filename: null };
     }
+    console.log("Content-Length:", req.headers['content-length']);
     return {
       message: 'File uploaded successfully',
       filename: file.originalname,
       storedName: file.filename,
+      size: file.size, // <-- in bytes
       path: file.path,
     };
   }

@@ -20,6 +20,8 @@ export class FileUploadComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
+      console.log("File size (bytes):", this.selectedFile.size);
+      console.log("File size (MB):", (this.selectedFile.size / (1024 * 1024)).toFixed(2));
       this.uploadResponse = null;
     }
   }
