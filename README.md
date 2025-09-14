@@ -125,4 +125,10 @@ Studio 3T → MongoDB-focused, with deep document editing features.
 
 DbVisualizer → Multi-database, SQL-first, great if you deal with PostgreSQL, MySQL, Oracle, etc., in one tool.
 
+## database
+
+https://www.youtube.com/watch?v=lvCZk3k4-34
+
+https://www.youtube.com/watch?v=DVGGf3LwHmU
+
 https://neopetsclassic.com/
