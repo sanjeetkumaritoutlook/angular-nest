@@ -32,6 +32,14 @@ Test the API
 
 Test in ThunderClient or POSTMAN
 
+## kill task:
+```
+ netstat -ano | findstr :8081
+ 
+ taskkill /PID <PID_NUMBER> /F
+ taskkill /PID 3312 /F
+``` 
+
 ## Connect to MongoDB ,install Mongoose:
 
 npm install @nestjs/mongoose mongoose
